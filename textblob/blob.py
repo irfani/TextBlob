@@ -41,6 +41,7 @@ from textblob.sentiments import PatternAnalyzer
 from textblob.parsers import PatternParser
 from textblob.translate import Translator
 from textblob.en import suggest
+from mtranslate import translate
 
 # Wordnet interface
 # NOTE: textblob.wordnet is not imported so that the wordnet corpus can be lazy-loaded
@@ -97,8 +98,11 @@ class Word(unicode):
 
         .. versionadded:: 0.5.0
         '''
-        return self.translator.translate(self.string,
-                                         from_lang=from_lang, to_lang=to)
+        # return self.translator.translate(self.string,
+        #                                  from_lang=from_lang, to_lang=to)
+        
+        #using mtranslate lib
+        return translate(self.string, to, from_lang)                                 
 
     def detect_language(self):
         '''Detect the word's language using Google's Translate API.
